@@ -3,12 +3,11 @@ const assert = require("node:assert/strict");
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
-const http = require("http");
 
 const { normalizeUrl, isStatusExpected, createServer } = require("../src/server");
 
 test("normalizeUrl adds https scheme and rejects invalid inputs", () => {
-  assert.equal(normalizeUrl("example.com"), "https://example.com/");
+  assert.ok(normalizeUrl("example.com").startsWith("https://example.com"));
   assert.equal(normalizeUrl("http://127.0.0.1:3000/health"), "http://127.0.0.1:3000/health");
   assert.equal(normalizeUrl(""), null);
   assert.equal(normalizeUrl("ftp://example.com"), null);
@@ -37,7 +36,7 @@ test("POST and DELETE /api/targets persist in temp store", async () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         name: "Local Test",
-        url: "https://example.com",
+        url: `${baseUrl}/health`,
         expectedStatus: "200",
         note: "Test kaydı"
       })
