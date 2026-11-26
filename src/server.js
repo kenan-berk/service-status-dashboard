@@ -93,6 +93,9 @@ function saveTargets(targets, filePath = DATA_FILE) {
 function normalizeUrl(input) {
   const trimmed = String(input || "").trim();
   if (!trimmed) return null;
+  if (/^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(trimmed) && !/^https?:\/\//i.test(trimmed)) {
+    return null;
+  }
   const withScheme = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
   try {
     const u = new URL(withScheme);
