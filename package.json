@@ -1,0 +1,13 @@
+{
+  "name": "compose-starter-ci",
+  "version": "1.0.0",
+  "description": "Docker Compose and GitHub Actions CI starter service in Node.js",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
